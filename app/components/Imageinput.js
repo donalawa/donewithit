@@ -26,6 +26,7 @@ function Imageinput({ imageUri, onChangeImage }) {
             { text: 'No' }
         ])
     }
+    
 
     const selectImage = async () => {
         try {
