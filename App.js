@@ -32,14 +32,95 @@ import ListingEditScreen from "./app/screens/ListingEditScreen";
 import Imageinput from "./app/components/Imageinput";
 import ImageInputList from "./app/components/ImageInputList";
 
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
+
+
+
+const Stack = createNativeStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator initialRouteName="Tweets" 
+  screenOptions={{
+    headerStyle: { backgroundColor: 'brown'}
+  }}
+  >
+    <Stack.Screen 
+    name="TweetDetails" 
+    component={TweetDetails} 
+    options={{
+      headerStyle: { backgroundColor: 'tomato'},
+      headerTintColor: 'white',
+      headerShown: false
+    }}
+    />
+    <Stack.Screen name="Tweets" component={Tweets} />
+  </Stack.Navigator>
+)
+
+const Account = () => <Screen><Text>Account</Text></Screen>
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+    <Tab.Navigator 
+    screenOptions={{
+      tabBarActiveBackgroundColor: 'tomato',
+      tabBarActiveTintColor: 'white',
+      tabBarInactiveBackgroundColor: '#eee',
+      tabBarInactiveTintColor: 'black'
+    }}
+    >
+      <Tab.Screen 
+      name="Tweets" 
+      component={Tweets}
+      options={{
+        tabBarIcon: ({ size, color}) => <MaterialCommunityIcons name="home" color={color} size={size}/>
+      }}
+      />
+      <Tab.Screen name="Accounts" component={Account}/>
+    </Tab.Navigator>
+);
 export default function App() {
 
   
   return (
-    <Screen>
-      <ListingEditScreen />
-    </Screen>
+    <NavigationContainer theme={navigationTheme}>
+        {/* <StackNavigator /> */}
+        {/* <AuthNavigator /> */}
+        <AppNavigator />
+    </NavigationContainer>
   );
+}
+
+const Tweets = ({ navigation }) => {
+  return (
+    <Screen>
+      <Text>Tweets</Text>
+      <Button
+      title="View Tweet"
+      onPress={() => navigation.navigate("TweetDetails", {id: 'working'})}
+       />
+       {/* <Link /> */}
+    </Screen>
+  )
+}
+
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <Button title="Link" onPress={() =>  navigation.navigate('TweetDetails')}/>
+  )
+}
+
+const TweetDetails = ({ route }) => {
+  return (
+    <Screen>
+      <Text>Tweet Details { route.params.id}</Text>
+    </Screen>
+  )
 }
 
 const styles = StyleSheet.create({});
