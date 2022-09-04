@@ -23,6 +23,7 @@ const listings = [
 
 function ListingsScreen({ navigation }) {
     return (
+        
         <Screen style={styles.screen}>
             <FlatList 
                 data={listings}
