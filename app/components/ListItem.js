@@ -5,6 +5,7 @@ import AppText from './AppText';
 import Swipeable  from 'react-native-gesture-handler/Swipeable'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+
 function ListItem({title, subTitle, image, IconComponent: IconComponent, onPress, renderRightActions}) {
     return (
         <Swipeable renderRightActions={renderRightActions}>
