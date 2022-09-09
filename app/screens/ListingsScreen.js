@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     screen: {
         padding: 10,
         paddingVertical:20,
-        backgroundColor: colors.light
+        backgroundColor: colors.light,
+        
     }
 })
 

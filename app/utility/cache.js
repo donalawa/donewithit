@@ -26,9 +26,11 @@ const isExpired = (item) => {
 const get = async (key) => {
     try {
         const value = await AsyncStorage.getItem(prefix + key);
+        // console.log('async storage value')
+        // console.log(value)
         let item = JSON.parse(value);
         
-        if(!item) return null;ß
+        if(!item) return null;
 
         if(isExpired(item)) {
             // Command Query Seperation
